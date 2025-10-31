@@ -1,0 +1,32 @@
+{% extends 'portfolio/base.html' %}
+{% load svg_icons %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Hi, I'm Atul Arya</h1>
+        <p class="hero-subtitle">Full Stack Developer | {% svg_icon 'github' %} Designer | Creator</p>
+        <a href="{% url 'portfolio:projects' %}" class="btn">View My Work</a>
+    </div>
+</section>
+
+<section class="featured-projects">
+    <div class="container">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            {% for project in featured_projects %}
+            <a decoration:none href="{% url 'DIP:dip_home' %}">
+            <div class="project-card">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                {% endif %}
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatewords:20 }}</p>
+                <span class="tech-stack">{{ project.tech_stack }}</span>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

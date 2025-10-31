@@ -1,0 +1,49 @@
+{% load static %}
+{% load svg_icons %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'portfolio:home' %}" class="logo">
+                {% svg_icon 'logo' 'logo-icon' %}
+                <sapn class="logo-text">Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{% url 'portfolio:home' %}">Home</a></li>
+                <li><a href="{% url 'portfolio:about' %}">About</a></li>
+                <li><a href="{% url 'portfolio:projects' %}">Projects</a></li>
+                <li><a href="{% url 'portfolio:contact' %}">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

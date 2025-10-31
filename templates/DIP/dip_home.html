@@ -1,0 +1,40 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+{% comment %} {% load svg_icons %} {% endcomment %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works Portfolio - {{ request.user.username|default:"Portfolio" }}</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/cards.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>My Works</h1>
+            <p>Explore my latest projects and creations showcasing various technologies and skills</p>
+        </div>
+        <!-- Works Grid -->
+        <div class="project-grid">
+            {% for work in works %}
+            <div class="project-card">
+                <a href="{% url 'DIP:image_transformation' 'work.title' %}">
+                {% if work.image %}
+                <img src="{{ work.image.url }}" alt="{{ work.title }}">
+                {% endif %}
+                <h3>{{ work.title }}</h3>
+                <p>{{ work.description }}</p>
+                <span class="tech-stack">{{ work.tech_stack }}</span>
+                </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
