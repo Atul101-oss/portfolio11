@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import DetectionHistory
-# from .ml_model import detector
+from .ml_model import detector
+
+
 import json
 
 def detect_view(request):
@@ -20,8 +22,8 @@ def detect_api(request):
             image_file = request.FILES['image']
             
             # Run detection
-            # predictions = detector.predict(image_file)
-            predictions = [{'id': 'n02123045', 'label': 'tabby', 'confidence': 85.0}]  # Placeholder
+            predictions = detector.predict(image_file)[0]
+            # predictions = [{'id': 'n02123045', 'label': 'tabby', 'confidence': 85.0}]  # Placeholder
             
             # Save to database
             image_file.seek(0)  # Reset file pointer

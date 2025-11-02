@@ -6,27 +6,24 @@
         <h1>My Projects</h1>
         
         <!-- Featured Project: Image Detection -->
+        <a style="text-decoration: none; color: inherit;" href="{% url 'image_detection:detect' %}">
         <div class="featured-project">
             <div class="project-card special">
                 <div class="project-badge">🌟 Featured AI Project</div>
                 <h3>AI Image Detection</h3>
-                <p>
+                <p style="color:beige;">
                     A powerful machine learning application that uses TensorFlow and MobileNetV2 
                     to identify objects in images. Upload any image and get instant predictions 
                     with confidence scores. Built with Django and powered by state-of-the-art 
                     deep learning models.
                 </p>
-                <p>Resolved URL: {% url 'image_detection:detect' %}</p>
-
                 <span class="tech-stack">Python • TensorFlow • Django • MobileNetV2 • AI/ML</span>
                 <div class="project-links">
-                    <a href="{% url 'image_detection:detect' %}" >Try Live Demo
-                    </a>
-
+                    <button type="button" class="btn-primary" href="{% url 'image_detection:detect' %}">Try Live Demo</button>
                 </div>
             </div>
         </div>
-
+        </a>
         <h2 style="margin-top: 3rem;">Other Projects</h2>
         <div class="project-grid">
             {% for project in projects %}

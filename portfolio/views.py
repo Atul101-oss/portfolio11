@@ -1,7 +1,12 @@
-
+import os
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Project, Skill, Contact
+from django.http import HttpResponseRedirect
+from django.http import FileResponse, Http404
+from django.shortcuts import redirect
+from django.conf import settings
+
 
 def home(request):
     featured_projects = Project.objects.filter(featured=True)[:3]
@@ -9,6 +14,14 @@ def home(request):
         'featured_projects': featured_projects,
     }
     return render(request, 'portfolio/home.html', context)
+
+def view_resume(request):
+    # return redirect('/media/portfolio/resume.pdf')
+    file_path = os.path.join(settings.MEDIA_ROOT, 'portfolio', 'resume.pdf')
+    if os.path.exists(file_path):
+        return FileResponse(open(file_path, 'rb'), content_type='application/pdf')
+    else:
+        raise Http404("Resume not found")
 
 def about(request):
     skills = Skill.objects.all()
